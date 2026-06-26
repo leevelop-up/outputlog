@@ -1,0 +1,33 @@
+# 환경변수
+.env
+*.env.local
+
+# 빌드 결과물
+backend/build/
+frontend/dist/
+frontend/node_modules/
+hermes/.venv/
+hermes/memory/
+
+# Gradle
+.gradle/
+backend/.gradle/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# 이미지
+*.png
+*.jpg
+*.jpeg
+
+# OS
+.DS_Store
+
+# Playwright 임시파일
+.playwright-mcp/
+
+# 임시 파일
+/tmp/
