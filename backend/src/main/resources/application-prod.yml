@@ -17,6 +17,6 @@ spring:
 
 app:
   cors:
-    allowed-origins: ${CORS_ORIGINS:http://localhost}
+    allowed-origins: ${CORS_ORIGINS:https://outputlog.com}
   oauth2:
     redirect-uri: ${OAUTH2_REDIRECT_URI:https://outputlog.com/oauth-callback}
