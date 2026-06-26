@@ -26,6 +26,10 @@ backend/.gradle/
 # OS
 .DS_Store
 
+# Python 캐시
+__pycache__/
+*.pyc
+
 # Playwright 임시파일
 .playwright-mcp/
 
