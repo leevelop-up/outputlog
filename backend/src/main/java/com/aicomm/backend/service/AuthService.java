@@ -99,4 +99,9 @@ public class AuthService {
     public void logout(Long userId) {
         redisTemplate.delete("refresh:" + userId);
     }
+
+    public UserResponse getMe(Long userId) {
+        return UserResponse.from(userRepository.findById(userId)
+                .orElseThrow(() -> BusinessException.notFound("사용자를 찾을 수 없습니다.")));
+    }
 }

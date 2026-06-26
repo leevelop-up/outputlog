@@ -5,9 +5,10 @@
 /* ═══ HEADER ════════════════════════════════════════════════════ */
 .header {
   position:sticky; top:0; z-index:200;
-  background:rgba(13,17,23,.92);
+  background:rgba(var(--bg-rgb, 13,17,23),.92);
   backdrop-filter:blur(14px) saturate(1.4);
   border-bottom:1px solid var(--border);
+  background:color-mix(in srgb, var(--bg) 92%, transparent);
 }
 .header-inner {
   max-width:960px; margin:0 auto; padding:0 24px;
@@ -36,6 +37,7 @@
 .nav-link.nav-new:hover{ background:rgba(63,185,80,.14); border-color:var(--green); }
 .nav-link.nav-out      { color:var(--text-dim); }
 .nav-link.nav-out:hover{ color:var(--red); background:rgba(248,81,73,.08); }
+.nav-link.theme-toggle { font-size:14px; margin-left:4px; }
 
 /* ═══ FOOTER ════════════════════════════════════════════════════ */
 .footer {
@@ -443,6 +445,24 @@
 }
 .auth-foot a { color:var(--primary); }
 .auth-foot a:hover { text-decoration:underline; }
+.social-login { display:flex; flex-direction:column; gap:10px; margin-bottom:4px; }
+.btn-social {
+  display:flex; align-items:center; justify-content:center; gap:10px;
+  padding:10px 16px; border-radius:var(--r); border:1px solid var(--border);
+  font-family:var(--mono); font-size:13px; font-weight:500; cursor:pointer;
+  transition:all .18s; color:var(--text); background:var(--bg-card);
+  text-decoration:none !important;
+}
+.btn-social:hover { border-color:var(--primary); background:var(--bg-hover); }
+.btn-github svg { color:var(--text); }
+.auth-divider {
+  display:flex; align-items:center; gap:12px;
+  margin:16px 0; color:var(--text-dim);
+  font-family:var(--mono); font-size:11px;
+}
+.auth-divider::before,.auth-divider::after {
+  content:''; flex:1; height:1px; background:var(--border);
+}
 
 /* ═══ POST FORM ══════════════════════════════════════════════════ */
 .post-form-page { animation:fadeUp .4s ease both; }

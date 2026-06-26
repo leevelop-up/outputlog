@@ -39,4 +39,9 @@ public class AuthController {
         authService.logout(SecurityUtil.getCurrentUserId());
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/me")
+    ResponseEntity<UserResponse> me() {
+        return ResponseEntity.ok(authService.getMe(SecurityUtil.getCurrentUserId()));
+    }
 }

@@ -18,8 +18,14 @@ public class User extends BaseTimeEntity {
     @Column(nullable = false, unique = true, length = 50)
     private String email;
 
-    @Column(nullable = false)
+    @Column
     private String password;
+
+    @Column(length = 20)
+    private String provider;   // github, google (null = local)
+
+    @Column(name = "provider_id")
+    private String providerId;
 
     @Column(nullable = false, unique = true, length = 30)
     private String nickname;
@@ -38,6 +44,11 @@ public class User extends BaseTimeEntity {
     @Column(name = "is_active", nullable = false)
     @Builder.Default
     private boolean active = true;
+
+    public void linkOAuth(String provider, String providerId) {
+        this.provider = provider;
+        this.providerId = providerId;
+    }
 
     public void updateProfile(String nickname, String bio, String profileImage) {
         this.nickname = nickname;

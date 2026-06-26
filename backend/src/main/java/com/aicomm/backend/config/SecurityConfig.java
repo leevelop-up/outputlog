@@ -1,7 +1,9 @@
 package com.aicomm.backend.config;
 
+import com.aicomm.backend.security.CustomOAuth2UserService;
 import com.aicomm.backend.security.JwtAuthenticationFilter;
 import com.aicomm.backend.security.JwtTokenProvider;
+import com.aicomm.backend.security.OAuth2SuccessHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,6 +27,8 @@ public class SecurityConfig {
 
     private final JwtTokenProvider jwtTokenProvider;
     private final UserDetailsService userDetailsService;
+    private final CustomOAuth2UserService customOAuth2UserService;
+    private final OAuth2SuccessHandler oauth2SuccessHandler;
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -33,9 +37,16 @@ public class SecurityConfig {
             .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/auth/**").permitAll()
+                .requestMatchers("/oauth2/**", "/login/oauth2/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/posts/**", "/api/comments/**").permitAll()
                 .requestMatchers("/swagger-ui/**", "/api-docs/**").permitAll()
                 .anyRequest().authenticated()
+            )
+            .oauth2Login(oauth2 -> oauth2
+                .authorizationEndpoint(e -> e.baseUri("/oauth2/authorization"))
+                .redirectionEndpoint(e -> e.baseUri("/login/oauth2/code/*"))
+                .userInfoEndpoint(u -> u.userService(customOAuth2UserService))
+                .successHandler(oauth2SuccessHandler)
             )
             .addFilterBefore(
                 new JwtAuthenticationFilter(jwtTokenProvider, userDetailsService),

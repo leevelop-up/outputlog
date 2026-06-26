@@ -53,11 +53,11 @@ export default function PostFormPage() {
         <div className="form-group">
           <label className="form-label">category</label>
           <select {...register('category')} className="form-select">
-            <option value="DISCUSSION">discussion</option>
-            <option value="QUESTION">question</option>
-            <option value="SHOWCASE">showcase</option>
-            <option value="NEWS">news</option>
-            <option value="TUTORIAL">tutorial</option>
+            <option value="DISCUSSION">토론</option>
+            <option value="QUESTION">질문</option>
+            <option value="SHOWCASE">쇼케이스</option>
+            <option value="NEWS">AI 소식</option>
+            <option value="TUTORIAL">튜토리얼</option>
           </select>
         </div>
         <div className="form-group">

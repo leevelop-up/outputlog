@@ -5,16 +5,10 @@ import { formatDistanceToNow } from 'date-fns'
 import { ko } from 'date-fns/locale'
 import { useAuthStore } from '@/store/authStore'
 import type { PostCategory } from '@/types'
+import { CATEGORY_LABELS } from '@/constants/categories'
 import { useRef } from 'react'
 
-const TABS: { key: PostCategory | ''; label: string }[] = [
-  { key:'',           label:'all' },
-  { key:'DISCUSSION', label:'discussion' },
-  { key:'QUESTION',   label:'question' },
-  { key:'SHOWCASE',   label:'showcase' },
-  { key:'NEWS',       label:'news' },
-  { key:'TUTORIAL',   label:'tutorial' },
-]
+const TABS: (PostCategory | '')[] = ['', 'DISCUSSION', 'QUESTION', 'SHOWCASE', 'NEWS', 'TUTORIAL']
 
 export default function PostListPage() {
   const [params, setParams] = useSearchParams()
@@ -57,8 +51,8 @@ export default function PostListPage() {
 
       <div className="tab-bar">
         {TABS.map(t => (
-          <button key={t.key} className={`tab${category === t.key ? ' active' : ''}`} onClick={() => go({ category: t.key })}>
-            {t.label}
+          <button key={t} className={`tab${category === t ? ' active' : ''}`} onClick={() => go({ category: t })}>
+            {CATEGORY_LABELS[t]}
           </button>
         ))}
       </div>
@@ -76,7 +70,7 @@ export default function PostListPage() {
             {data.content.map(post => (
               <Link key={post.id} to={`/posts/${post.id}`} className="post-card">
                 <div className="post-card-top">
-                  <span className={`badge badge-${post.category}`}>{post.category.toLowerCase()}</span>
+                  <span className={`badge badge-${post.category}`}>{CATEGORY_LABELS[post.category]}</span>
                   {post.tags.slice(0,3).map(t => <span key={t} className="tag">#{t}</span>)}
                   <span className="post-card-author">@{post.author.nickname}</span>
                 </div>

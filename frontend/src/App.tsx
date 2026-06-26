@@ -7,6 +7,7 @@ import SignUpPage from '@/pages/SignUpPage'
 import PostListPage from '@/pages/PostListPage'
 import PostDetailPage from '@/pages/PostDetailPage'
 import PostFormPage from '@/pages/PostFormPage'
+import OAuthCallbackPage from '@/pages/OAuthCallbackPage'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -27,6 +28,7 @@ export default function App() {
             <Route path="/posts/new" element={<PostFormPage />} />
             <Route path="/posts/:id" element={<PostDetailPage />} />
             <Route path="/posts/:id/edit" element={<PostFormPage />} />
+            <Route path="/oauth-callback" element={<OAuthCallbackPage />} />
           </Route>
         </Routes>
       </BrowserRouter>

@@ -28,6 +28,27 @@ html { scroll-behavior: smooth; }
   --glow:        0 0 24px rgba(88,166,255,0.18);
 }
 
+[data-theme="light"] {
+  --bg:          #ffffff;
+  --bg-card:     #f6f8fa;
+  --bg-hover:    #eaeef2;
+  --bg-input:    #ffffff;
+  --border:      #d0d7de;
+  --border-hi:   #0969da;
+  --text:        #1f2328;
+  --text-muted:  #57606a;
+  --text-dim:    #8c959f;
+  --primary:     #0969da;
+  --primary-dk:  #0550ae;
+  --green:       #1a7f37;
+  --orange:      #bf8700;
+  --red:         #cf222e;
+  --purple:      #8250df;
+  --teal:        #1a7f37;
+  --shadow:      0 8px 32px rgba(31,35,40,0.12);
+  --glow:        0 0 24px rgba(9,105,218,0.15);
+}
+
 body {
   font-family: var(--sans);
   background: var(--bg);

@@ -51,6 +51,11 @@ services:
       REDIS_PASSWORD: ${REDIS_PASSWORD:-redis1234}
       JWT_SECRET: ${JWT_SECRET:-outputlog-jwt-secret-key-must-be-at-least-256-bits-long!!}
       CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost,http://localhost:80}
+      GITHUB_CLIENT_ID: ${GITHUB_CLIENT_ID:-}
+      GITHUB_CLIENT_SECRET: ${GITHUB_CLIENT_SECRET:-}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-}
+      OAUTH2_REDIRECT_URI: ${OAUTH2_REDIRECT_URI:-https://outputlog.com/oauth-callback}
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/nsuslab_db?useSSL=false&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
     depends_on:
       db:
