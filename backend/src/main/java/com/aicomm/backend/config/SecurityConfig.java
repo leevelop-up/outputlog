@@ -37,13 +37,13 @@ public class SecurityConfig {
             .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/auth/**").permitAll()
-                .requestMatchers("/oauth2/**", "/login/oauth2/**").permitAll()
+                .requestMatchers("/api/oauth2/**", "/login/oauth2/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/posts/**", "/api/comments/**").permitAll()
                 .requestMatchers("/swagger-ui/**", "/api-docs/**").permitAll()
                 .anyRequest().authenticated()
             )
             .oauth2Login(oauth2 -> oauth2
-                .authorizationEndpoint(e -> e.baseUri("/oauth2/authorization"))
+                .authorizationEndpoint(e -> e.baseUri("/api/oauth2/authorization"))
                 .redirectionEndpoint(e -> e.baseUri("/login/oauth2/code/*"))
                 .userInfoEndpoint(u -> u.userService(customOAuth2UserService))
                 .successHandler(oauth2SuccessHandler)
