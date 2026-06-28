@@ -1,0 +1,44 @@
+package com.aicomm.backend.controller;
+
+import com.aicomm.backend.dto.response.UserResponse;
+import com.aicomm.backend.entity.User;
+import com.aicomm.backend.exception.BusinessException;
+import com.aicomm.backend.repository.UserRepository;
+import com.aicomm.backend.util.SecurityUtil;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
+
+@RestController
+@RequestMapping("/api/users")
+@RequiredArgsConstructor
+public class UserController {
+
+    private final UserRepository userRepository;
+
+    @PutMapping("/me")
+    public ResponseEntity<UserResponse> updateMe(@RequestBody Map<String, String> body) {
+        Long userId = SecurityUtil.getCurrentUserId();
+        User user = userRepository.findById(userId)
+            .orElseThrow(() -> BusinessException.notFound("사용자를 찾을 수 없습니다."));
+
+        String nickname = body.get("nickname");
+        String bio = body.get("bio");
+
+        if (nickname != null && !nickname.isBlank()) {
+            if (!nickname.equals(user.getNickname()) && userRepository.findByNickname(nickname).isPresent()) {
+                throw BusinessException.badRequest("이미 사용 중인 닉네임입니다.");
+            }
+        }
+
+        user.updateProfile(
+            nickname != null ? nickname.trim() : user.getNickname(),
+            bio != null ? bio.trim() : user.getBio(),
+            user.getProfileImage()
+        );
+        userRepository.save(user);
+        return ResponseEntity.ok(UserResponse.from(user));
+    }
+}

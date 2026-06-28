@@ -43,7 +43,7 @@ export default function Header() {
           {isAuthenticated ? (
             <>
               <Link to="/posts/new" className="nav-link nav-new">＋ new post</Link>
-              <Link to="/profile" className={cls('/profile')}>{user?.nickname}</Link>
+              <Link to="/mypage" className={cls('/mypage')}>{user?.nickname}</Link>
               <button onClick={handleLogout} className="nav-link nav-out">logout</button>
             </>
           ) : (
