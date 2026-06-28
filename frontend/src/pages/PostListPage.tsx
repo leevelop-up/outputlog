@@ -59,7 +59,7 @@ export default function PostListPage() {
 
       {isLoading ? (
         <div className="loading"><div className="loading-ring" />loading...</div>
-      ) : !data?.content.length ? (
+      ) : !data?.content?.length ? (
         <div className="empty">
           <div className="empty-icon">📭</div>
           <div className="empty-msg">// no posts found</div>

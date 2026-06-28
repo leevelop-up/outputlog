@@ -80,7 +80,7 @@ function BoardSection({
           <div className="home-board-loading">
             <div className="loading-ring" />
           </div>
-        ) : !data?.content.length ? (
+        ) : !data?.content?.length ? (
           <div className="home-board-empty">// 아직 게시글이 없습니다</div>
         ) : (
           data.content.map(p => <PostRow key={p.id} post={p} />)

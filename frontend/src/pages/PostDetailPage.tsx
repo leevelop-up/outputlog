@@ -122,7 +122,7 @@ export default function PostDetailPage() {
                 <span className="comment-when">{timeAgo(c.createdAt)}</span>
               </div>
               <p className="comment-text">{c.content}</p>
-              {c.replies.map(r => (
+              {(c.replies ?? []).map(r => (
                 <div key={r.id} className="reply-item">
                   <div className="comment-item-head">
                     <span className="comment-nick">@{r.author.nickname}</span>
