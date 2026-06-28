@@ -71,7 +71,7 @@ export default function PostListPage() {
               <Link key={post.id} to={`/posts/${post.id}`} className="post-card">
                 <div className="post-card-top">
                   <span className={`badge badge-${post.category}`}>{CATEGORY_LABELS[post.category]}</span>
-                  {post.tags.slice(0,3).map(t => <span key={t} className="tag">#{t}</span>)}
+                  {(post.tags ?? []).slice(0,3).map(t => <span key={t} className="tag">#{t}</span>)}
                   <span className="post-card-author">@{post.author.nickname}</span>
                 </div>
                 <div className="post-card-title">{post.title}</div>

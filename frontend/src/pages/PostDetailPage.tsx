@@ -50,7 +50,7 @@ export default function PostDetailPage() {
       <div className="post-hd">
         <div className="post-hd-top">
           <span className={`badge badge-${post.category}`}>{post.category.toLowerCase()}</span>
-          {post.tags.map(t => <span key={t} className="tag">#{t}</span>)}
+          {(post.tags ?? []).map(t => <span key={t} className="tag">#{t}</span>)}
         </div>
         <h1 className="post-hd-title">{post.title}</h1>
         <div className="post-hd-meta">
@@ -72,9 +72,9 @@ export default function PostDetailPage() {
         <ReactMarkdown remarkPlugins={[remarkGfm]}>{post.content}</ReactMarkdown>
       </div>
 
-      {post.tags.length > 0 && (
+      {(post.tags ?? []).length > 0 && (
         <div className="post-tags-wrap">
-          {post.tags.map(t => <span key={t} className="tag">#{t}</span>)}
+          {(post.tags ?? []).map(t => <span key={t} className="tag">#{t}</span>)}
         </div>
       )}
 
