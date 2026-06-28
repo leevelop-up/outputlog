@@ -1,0 +1,32 @@
+User-agent: *
+Allow: /
+
+# Google
+User-agent: Googlebot
+Allow: /
+
+# Bing / ChatGPT (웹 검색 기반)
+User-agent: bingbot
+Allow: /
+
+# GPTBot (OpenAI)
+User-agent: GPTBot
+Allow: /
+
+# ChatGPT-User (ChatGPT 플러그인)
+User-agent: ChatGPT-User
+Allow: /
+
+# Claude (Anthropic)
+User-agent: ClaudeBot
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+# Meta (LlamaBot)
+User-agent: FacebookBot
+Allow: /
+
+Sitemap: https://outputlog.com/sitemap.xml
