@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://outputlog.com/</loc>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://outputlog.com/"/>
   </url>
   <url>
     <loc>https://outputlog.com/posts</loc>
@@ -34,10 +36,5 @@
     <loc>https://outputlog.com/posts?category=QUESTION</loc>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://outputlog.com/login</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
   </url>
 </urlset>

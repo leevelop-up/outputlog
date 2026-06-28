@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Primary Meta Tags -->
-    <title>OutputLog — AI 개발자 커뮤니티</title>
-    <meta name="title" content="OutputLog — AI 개발자 커뮤니티" />
-    <meta name="description" content="AI 개발자들이 모이는 기술 커뮤니티. LLM, 머신러닝, 자동화, 최신 AI 뉴스와 튜토리얼을 공유합니다." />
-    <meta name="keywords" content="AI, LLM, ChatGPT, 머신러닝, 딥러닝, 개발자 커뮤니티, 인공지능, Python, 자동화, outputlog" />
+    <title>OutputLog — 한국 AI·개발자 커뮤니티 | LLM·머신러닝 토론·질문·뉴스</title>
+    <meta name="title" content="OutputLog — 한국 AI·개발자 커뮤니티 | LLM·머신러닝 토론·질문·뉴스" />
+    <meta name="description" content="OutputLog는 한국 AI 개발자들이 모이는 기술 커뮤니티입니다. ChatGPT, Claude, LLM, 머신러닝, 딥러닝 관련 질문·토론·최신 뉴스·튜토리얼을 자유롭게 공유하세요." />
+    <meta name="keywords" content="AI 개발자 커뮤니티, 한국 개발자 커뮤니티, LLM 커뮤니티, 머신러닝 포럼, 인공지능 커뮤니티, ChatGPT 한국, Claude AI, 딥러닝 질문, AI 튜토리얼, outputlog, AI 뉴스, 개발자 포럼" />
     <meta name="author" content="OutputLog" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://outputlog.com" />
@@ -18,30 +18,31 @@
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://outputlog.com/" />
-    <meta property="og:title" content="OutputLog — AI 개발자 커뮤니티" />
-    <meta property="og:description" content="AI 개발자들이 모이는 기술 커뮤니티. LLM, 머신러닝, 자동화, 최신 AI 뉴스와 튜토리얼을 공유합니다." />
+    <meta property="og:title" content="OutputLog — 한국 AI·개발자 커뮤니티" />
+    <meta property="og:description" content="ChatGPT, Claude, LLM, 머신러닝 관련 질문·토론·뉴스·튜토리얼. 한국 AI 개발자 커뮤니티 OutputLog에서 함께 성장하세요." />
     <meta property="og:image" content="https://outputlog.com/og-image.png" />
     <meta property="og:locale" content="ko_KR" />
     <meta property="og:site_name" content="OutputLog" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="OutputLog — AI 개발자 커뮤니티" />
-    <meta name="twitter:description" content="AI 개발자들이 모이는 기술 커뮤니티. LLM, 머신러닝, 자동화, 최신 AI 뉴스와 튜토리얼을 공유합니다." />
+    <meta name="twitter:title" content="OutputLog — 한국 AI·개발자 커뮤니티" />
+    <meta name="twitter:description" content="ChatGPT, Claude, LLM, 머신러닝 관련 질문·토론·뉴스·튜토리얼. 한국 AI 개발자 커뮤니티." />
     <meta name="twitter:image" content="https://outputlog.com/og-image.png" />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="manifest" href="/site.webmanifest" />
 
-    <!-- Structured Data (JSON-LD) -->
+    <!-- Structured Data: WebSite + SearchAction -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
       "name": "OutputLog",
+      "alternateName": "아웃풋로그",
       "url": "https://outputlog.com",
-      "description": "AI 개발자들이 모이는 기술 커뮤니티",
+      "description": "한국 AI 개발자 커뮤니티 — LLM, 머신러닝, 딥러닝, AI 자동화 관련 토론·질문·뉴스·튜토리얼",
       "inLanguage": "ko",
       "potentialAction": {
         "@type": "SearchAction",
@@ -53,9 +54,60 @@
       }
     }
     </script>
+
+    <!-- Structured Data: Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "OutputLog",
+      "url": "https://outputlog.com",
+      "description": "한국 AI 개발자 커뮤니티",
+      "inLanguage": "ko"
+    }
+    </script>
+
+    <!-- Structured Data: WebForum (개발자 커뮤니티) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "OutputLog — 한국 AI·개발자 커뮤니티",
+      "url": "https://outputlog.com",
+      "description": "AI 개발자들이 모이는 한국 기술 커뮤니티. LLM, 머신러닝, 딥러닝 관련 질문·토론·뉴스를 공유합니다.",
+      "inLanguage": "ko",
+      "about": [
+        {"@type": "Thing", "name": "인공지능"},
+        {"@type": "Thing", "name": "머신러닝"},
+        {"@type": "Thing", "name": "LLM"},
+        {"@type": "Thing", "name": "개발자 커뮤니티"}
+      ],
+      "audience": {
+        "@type": "Audience",
+        "audienceType": "개발자, AI 엔지니어, 데이터 사이언티스트"
+      }
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>
+    <!-- 검색엔진 크롤러용 정적 콘텐츠 -->
+    <noscript>
+      <div style="max-width:800px;margin:40px auto;font-family:sans-serif;padding:0 20px">
+        <h1>OutputLog — 한국 AI·개발자 커뮤니티</h1>
+        <p>OutputLog는 한국 AI 개발자들이 모이는 기술 커뮤니티입니다.<br>
+        ChatGPT, Claude, LLM, 머신러닝, 딥러닝 관련 질문·토론·뉴스·튜토리얼을 자유롭게 공유하세요.</p>
+        <ul>
+          <li><a href="/posts">전체 게시글</a></li>
+          <li><a href="/posts?category=NEWS">AI 소식</a></li>
+          <li><a href="/posts?category=TUTORIAL">튜토리얼</a></li>
+          <li><a href="/posts?category=DISCUSSION">토론</a></li>
+          <li><a href="/posts?category=QUESTION">질문</a></li>
+          <li><a href="/posts?category=SHOWCASE">쇼케이스</a></li>
+        </ul>
+        <p>이 사이트는 JavaScript가 필요합니다. 브라우저에서 JavaScript를 활성화해주세요.</p>
+      </div>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
