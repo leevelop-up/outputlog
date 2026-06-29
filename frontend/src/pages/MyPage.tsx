@@ -31,17 +31,12 @@ export default function MyPage() {
 
   const loadMyPosts = async () => {
     try {
-      const res = await client.get('/posts/my')
-      setMyPosts(res.data.content ?? res.data)
+      const res = await client.get('/posts', { params: { size: 100, page: 0 } })
+      const content: Post[] = Array.isArray(res.data?.content) ? res.data.content : []
+      const posts = content.filter(p => p.author?.nickname === user?.nickname)
+      setMyPosts(posts)
     } catch {
-      // 엔드포인트 없으면 전체에서 필터
-      try {
-        const res = await client.get('/posts', { params: { size: 100 } })
-        const posts = (res.data.content ?? res.data).filter(
-          (p: Post) => p.author?.nickname === user?.nickname
-        )
-        setMyPosts(posts)
-      } catch {}
+      setMyPosts([])
     } finally {
       setLoading(false)
     }

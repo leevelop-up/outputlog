@@ -11,6 +11,7 @@ public record UserResponse(
         String bio,
         String profileImage,
         String role,
+        String provider,
         LocalDateTime createdAt
 ) {
     public static UserResponse from(User user) {
@@ -21,6 +22,7 @@ public record UserResponse(
                 user.getBio(),
                 user.getProfileImage(),
                 user.getRole().name(),
+                user.getProvider(),
                 user.getCreatedAt()
         );
     }

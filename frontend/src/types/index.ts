@@ -5,6 +5,7 @@ export interface UserResponse {
   bio?: string
   profileImage?: string
   role: 'USER' | 'ADMIN'
+  provider?: string
   createdAt: string
 }
 
