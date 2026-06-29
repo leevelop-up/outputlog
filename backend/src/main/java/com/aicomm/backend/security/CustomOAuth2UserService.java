@@ -30,8 +30,10 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
         if ("github".equals(registrationId)) {
             providerId = String.valueOf(attrs.get("id"));
-            email = (String) attrs.getOrDefault("email", providerId + "@github.oauth");
-            nickname = (String) attrs.getOrDefault("login", "user_" + providerId.substring(0, 6));
+            String rawEmail = (String) attrs.get("email");
+            email = (rawEmail != null && !rawEmail.isBlank()) ? rawEmail : (providerId + "@github.oauth");
+            String rawLogin = (String) attrs.get("login");
+            nickname = (rawLogin != null && !rawLogin.isBlank()) ? rawLogin : ("gh_" + providerId.substring(0, 6));
         } else if ("google".equals(registrationId)) {
             providerId = (String) attrs.get("sub");
             email = (String) attrs.get("email");
