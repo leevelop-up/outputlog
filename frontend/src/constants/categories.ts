@@ -6,7 +6,7 @@ export const CATEGORY_LABELS: Record<PostCategory | '', string> = {
   NEWS:       '최신뉴스',
   SHOWCASE:   '프로젝트',
   GITHUB:     'GitHub',
-  DISCUSSION: '토론',
+  DISCUSSION: '자유게시판',
   TUTORIAL:   '튜토리얼',
 }
 
