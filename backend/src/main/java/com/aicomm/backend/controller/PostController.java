@@ -40,23 +40,23 @@ public class PostController {
     @PostMapping
     ResponseEntity<PostResponse> create(@Valid @RequestBody PostCreateRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(postService.create(SecurityUtil.getCurrentUserId(), request));
+                .body(postService.create(SecurityUtil.getCurrentUserIdOrThrow(), request));
     }
 
     @PutMapping("/{id}")
     ResponseEntity<PostResponse> update(@PathVariable Long id, @Valid @RequestBody PostCreateRequest request) {
-        return ResponseEntity.ok(postService.update(SecurityUtil.getCurrentUserId(), id, request));
+        return ResponseEntity.ok(postService.update(SecurityUtil.getCurrentUserIdOrThrow(), id, request));
     }
 
     @DeleteMapping("/{id}")
     ResponseEntity<Void> delete(@PathVariable Long id) {
-        postService.delete(SecurityUtil.getCurrentUserId(), id);
+        postService.delete(SecurityUtil.getCurrentUserIdOrThrow(), id);
         return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/{id}/like")
     ResponseEntity<Map<String, Boolean>> toggleLike(@PathVariable Long id) {
-        boolean liked = postService.toggleLike(SecurityUtil.getCurrentUserId(), id);
+        boolean liked = postService.toggleLike(SecurityUtil.getCurrentUserIdOrThrow(), id);
         return ResponseEntity.ok(Map.of("liked", liked));
     }
 }

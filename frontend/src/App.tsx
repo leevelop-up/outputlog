@@ -9,6 +9,8 @@ import PostDetailPage from '@/pages/PostDetailPage'
 import PostFormPage from '@/pages/PostFormPage'
 import OAuthCallbackPage from '@/pages/OAuthCallbackPage'
 import MyPage from '@/pages/MyPage'
+import SetupProfilePage from '@/pages/SetupProfilePage'
+import AdminPage from '@/pages/AdminPage'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -31,6 +33,8 @@ export default function App() {
             <Route path="/posts/:id/edit" element={<PostFormPage />} />
             <Route path="/oauth-callback" element={<OAuthCallbackPage />} />
             <Route path="/mypage" element={<MyPage />} />
+            <Route path="/setup-profile" element={<SetupProfilePage />} />
+            <Route path="/admin" element={<AdminPage />} />
           </Route>
         </Routes>
       </BrowserRouter>

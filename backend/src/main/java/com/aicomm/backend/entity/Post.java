@@ -28,6 +28,9 @@ public class Post extends BaseTimeEntity {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
 
+    @Column(name = "source_url", length = 500)
+    private String sourceUrl;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Category category;
@@ -48,9 +51,10 @@ public class Post extends BaseTimeEntity {
     @Builder.Default
     private List<PostTag> tags = new ArrayList<>();
 
-    public void update(String title, String content, Category category) {
+    public void update(String title, String content, String sourceUrl, Category category) {
         this.title = title;
         this.content = content;
+        this.sourceUrl = sourceUrl;
         this.category = category;
     }
 
@@ -67,6 +71,6 @@ public class Post extends BaseTimeEntity {
     }
 
     public enum Category {
-        DISCUSSION, QUESTION, SHOWCASE, NEWS, TUTORIAL
+        DISCUSSION, QUESTION, SHOWCASE, NEWS, TUTORIAL, GITHUB
     }
 }

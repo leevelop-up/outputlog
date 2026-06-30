@@ -22,9 +22,10 @@ public class CustomUserDetailsService implements UserDetailsService {
         User user = userRepository.findById(Long.parseLong(userId))
                 .orElseThrow(() -> new UsernameNotFoundException("User not found: " + userId));
 
+        String pw = user.getPassword() != null ? user.getPassword() : "{noop}OAUTH_NO_PASSWORD";
         return org.springframework.security.core.userdetails.User.builder()
                 .username(String.valueOf(user.getId()))
-                .password(user.getPassword())
+                .password(pw)
                 .authorities(List.of(new SimpleGrantedAuthority("ROLE_" + user.getRole().name())))
                 .build();
     }

@@ -18,9 +18,17 @@ export default function OAuthCallbackPage() {
       return
     }
 
+    const setup = params.get('setup') === 'true'
+
     if (token && refreshToken) {
       localStorage.setItem('accessToken', token)
       localStorage.setItem('refreshToken', refreshToken)
+
+      if (setup) {
+        navigate(`/setup-profile?token=${token}&refreshToken=${refreshToken}`)
+        return
+      }
+
       client.get('/auth/me').then(res => {
         login(res.data, token, refreshToken)
         navigate('/')

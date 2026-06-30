@@ -2,10 +2,11 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuthStore } from '@/store/authStore'
 import { authApi } from '@/api/auth'
 import { useEffect, useState } from 'react'
+import client from '@/api/client'
 
 function useTheme() {
   const [theme, setTheme] = useState<'dark' | 'light'>(() => {
-    return (localStorage.getItem('theme') as 'dark' | 'light') || 'dark'
+    return (localStorage.getItem('theme') as 'dark' | 'light') || 'light'
   })
 
   useEffect(() => {
@@ -18,16 +19,24 @@ function useTheme() {
 }
 
 export default function Header() {
-  const { user, isAuthenticated, logout } = useAuthStore()
+  const { user, isAuthenticated, logout, setUser } = useAuthStore()
   const navigate = useNavigate()
   const { pathname } = useLocation()
   const { theme, toggle } = useTheme()
+
+  // 앱 로드 시 인증된 상태면 최신 user 데이터로 갱신
+  useEffect(() => {
+    if (isAuthenticated && !user?.nickname) {
+      client.get('/auth/me').then(res => setUser(res.data)).catch(() => {})
+    }
+  }, [isAuthenticated])
 
   const handleLogout = async () => {
     try { await authApi.logout() } finally { logout(); navigate('/') }
   }
 
   const cls = (path: string) => `nav-link${pathname === path ? ' active' : ''}`
+  const displayName = user?.nickname || user?.email?.split('@')[0] || 'my page'
 
   return (
     <header className="header">
@@ -43,7 +52,7 @@ export default function Header() {
           {isAuthenticated ? (
             <>
               <Link to="/posts/new" className="nav-link nav-new">＋ new post</Link>
-              <Link to="/mypage" className={cls('/mypage')}>{user?.nickname}</Link>
+              <Link to="/mypage" className={cls('/mypage')}>{displayName}</Link>
               <button onClick={handleLogout} className="nav-link nav-out">logout</button>
             </>
           ) : (

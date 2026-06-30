@@ -60,6 +60,14 @@ public class User extends BaseTimeEntity {
         this.password = encodedPassword;
     }
 
+    public void changeRole(Role role) {
+        this.role = role;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
     public enum Role {
         USER, ADMIN
     }

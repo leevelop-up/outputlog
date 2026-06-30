@@ -46,9 +46,10 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         final String finalNickname = nickname;
         final String finalProviderId = providerId;
 
+        boolean[] isNew = {false};
         User user = userRepository.findByEmail(finalEmail)
             .orElseGet(() -> {
-                // ensure nickname uniqueness
+                isNew[0] = true;
                 String base = finalNickname.length() > 25 ? finalNickname.substring(0, 25) : finalNickname;
                 String unique = userRepository.findByNickname(base).isPresent()
                     ? base + "_" + UUID.randomUUID().toString().substring(0, 4)
@@ -67,6 +68,6 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             userRepository.save(user);
         }
 
-        return new OAuth2UserPrincipal(user, attrs);
+        return new OAuth2UserPrincipal(user, attrs, isNew[0]);
     }
 }

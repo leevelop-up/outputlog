@@ -34,12 +34,16 @@ public class SecurityConfig {
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
             .csrf(AbstractHttpConfigurer::disable)
+            .formLogin(AbstractHttpConfigurer::disable)
+            .httpBasic(AbstractHttpConfigurer::disable)
             .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/auth/**").permitAll()
                 .requestMatchers("/api/oauth2/**", "/login/oauth2/**").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/users/setup").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/posts/**", "/api/comments/**").permitAll()
                 .requestMatchers("/swagger-ui/**", "/api-docs/**").permitAll()
+                .requestMatchers("/api/admin/**").authenticated()
                 .anyRequest().authenticated()
             )
             .oauth2Login(oauth2 -> oauth2

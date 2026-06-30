@@ -45,8 +45,10 @@ public class AuthService {
     }
 
     public TokenResponse login(LoginRequest request) {
-        User user = userRepository.findByEmail(request.email())
-                .orElseThrow(() -> BusinessException.unauthorized("이메일 또는 비밀번호가 올바르지 않습니다."));
+        String identifier = request.email().trim();
+        User user = userRepository.findByEmail(identifier)
+                .or(() -> userRepository.findByNickname(identifier))
+                .orElseThrow(() -> BusinessException.unauthorized("아이디 또는 비밀번호가 올바르지 않습니다."));
 
         if (!passwordEncoder.matches(request.password(), user.getPassword())) {
             throw BusinessException.unauthorized("이메일 또는 비밀번호가 올바르지 않습니다.");

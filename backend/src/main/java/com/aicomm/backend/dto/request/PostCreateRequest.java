@@ -11,5 +11,6 @@ public record PostCreateRequest(
         @NotBlank @Size(max = 200) String title,
         @NotBlank String content,
         @NotNull Post.Category category,
-        List<String> tags
+        List<String> tags,
+        @Size(max = 500) String sourceUrl
 ) {}

@@ -6,7 +6,7 @@ import { authApi } from '@/api/auth'
 import { useAuthStore } from '@/store/authStore'
 
 const schema = z.object({
-  email:    z.string().email('유효한 이메일을 입력하세요'),
+  email:    z.string().min(1, '아이디를 입력하세요'),
   password: z.string().min(1, '비밀번호를 입력하세요'),
 })
 type F = z.infer<typeof schema>
@@ -22,7 +22,7 @@ export default function LoginPage() {
       login(res.user, res.accessToken, res.refreshToken)
       navigate('/')
     } catch {
-      setError('root', { message: '이메일 또는 비밀번호가 올바르지 않습니다.' })
+      setError('root', { message: '아이디 또는 비밀번호가 올바르지 않습니다.' })
     }
   }
 
@@ -49,22 +49,22 @@ export default function LoginPage() {
           </a>
         </div>
 
-        <div className="auth-divider"><span>또는 이메일로 로그인</span></div>
+        <div className="auth-divider"><span>또는 아이디로 로그인</span></div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="form">
           <div className="form-group">
-            <label className="form-label">email</label>
-            <input {...register('email')} className="form-input" type="email" placeholder="user@example.com" autoComplete="email" />
+            <label className="form-label">아이디</label>
+            <input {...register('email')} className="form-input" type="text" placeholder="아이디 또는 이메일" autoComplete="username" />
             {errors.email && <span className="form-error">{errors.email.message}</span>}
           </div>
           <div className="form-group">
-            <label className="form-label">password</label>
+            <label className="form-label">비밀번호</label>
             <input {...register('password')} className="form-input" type="password" placeholder="••••••••" autoComplete="current-password" />
             {errors.password && <span className="form-error">{errors.password.message}</span>}
           </div>
           {errors.root && <span className="form-error">{errors.root.message}</span>}
           <button type="submit" disabled={isSubmitting} className="btn btn-primary w-full">
-            {isSubmitting ? 'logging in...' : '→ login'}
+            {isSubmitting ? '로그인 중...' : '→ 로그인'}
           </button>
         </form>
       </div>

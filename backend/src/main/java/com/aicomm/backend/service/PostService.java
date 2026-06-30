@@ -34,6 +34,7 @@ public class PostService {
                 .author(author)
                 .title(request.title())
                 .content(request.content())
+                .sourceUrl(request.sourceUrl())
                 .category(request.category())
                 .build();
 
@@ -71,7 +72,7 @@ public class PostService {
     @Transactional
     public PostResponse update(Long userId, Long postId, PostCreateRequest request) {
         Post post = getOwnedPost(userId, postId);
-        post.update(request.title(), request.content(), request.category());
+        post.update(request.title(), request.content(), request.sourceUrl(), request.category());
         return PostResponse.from(post, postLikeRepository.existsByPostIdAndUserId(postId, userId));
     }
 
@@ -99,6 +100,21 @@ public class PostService {
                     post.incrementLikeCount();
                     return true;
                 });
+    }
+
+    public Page<PostResponse> getAdminList(Long userId, String category, String keyword, int page, int size) {
+        var pageable = org.springframework.data.domain.PageRequest.of(page, size,
+                org.springframework.data.domain.Sort.by("createdAt").descending());
+        Post.Category cat = (category != null && !category.isBlank())
+                ? Post.Category.valueOf(category) : null;
+        return getList(cat, keyword, userId, pageable);
+    }
+
+    @Transactional
+    public void adminDelete(Long postId) {
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> BusinessException.notFound("게시글을 찾을 수 없습니다."));
+        postRepository.delete(post);
     }
 
     private Post getOwnedPost(Long userId, Long postId) {

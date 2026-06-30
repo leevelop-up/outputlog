@@ -27,12 +27,13 @@ export interface LoginRequest {
   password: string
 }
 
-export type PostCategory = 'DISCUSSION' | 'QUESTION' | 'SHOWCASE' | 'NEWS' | 'TUTORIAL'
+export type PostCategory = 'DISCUSSION' | 'QUESTION' | 'SHOWCASE' | 'NEWS' | 'TUTORIAL' | 'GITHUB'
 
 export interface Post {
   id: number
   title: string
   content: string
+  sourceUrl?: string
   category: PostCategory
   viewCount: number
   likeCount: number
@@ -49,6 +50,7 @@ export interface PostCreateRequest {
   content: string
   category: PostCategory
   tags?: string[]
+  sourceUrl?: string
 }
 
 export interface Comment {

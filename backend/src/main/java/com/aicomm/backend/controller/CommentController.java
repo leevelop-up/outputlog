@@ -30,7 +30,7 @@ public class CommentController {
             @PathVariable Long postId,
             @Valid @RequestBody CommentCreateRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(commentService.create(SecurityUtil.getCurrentUserId(), postId, request));
+                .body(commentService.create(SecurityUtil.getCurrentUserIdOrThrow(), postId, request));
     }
 
     @PatchMapping("/{commentId}")
@@ -38,12 +38,12 @@ public class CommentController {
             @PathVariable Long postId,
             @PathVariable Long commentId,
             @RequestBody Map<String, String> body) {
-        return ResponseEntity.ok(commentService.update(SecurityUtil.getCurrentUserId(), commentId, body.get("content")));
+        return ResponseEntity.ok(commentService.update(SecurityUtil.getCurrentUserIdOrThrow(), commentId, body.get("content")));
     }
 
     @DeleteMapping("/{commentId}")
     ResponseEntity<Void> delete(@PathVariable Long postId, @PathVariable Long commentId) {
-        commentService.delete(SecurityUtil.getCurrentUserId(), commentId);
+        commentService.delete(SecurityUtil.getCurrentUserIdOrThrow(), commentId);
         return ResponseEntity.noContent().build();
     }
 }

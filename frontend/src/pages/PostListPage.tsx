@@ -8,7 +8,7 @@ import type { PostCategory } from '@/types'
 import { CATEGORY_LABELS } from '@/constants/categories'
 import { useRef } from 'react'
 
-const TABS: (PostCategory | '')[] = ['', 'DISCUSSION', 'QUESTION', 'SHOWCASE', 'NEWS', 'TUTORIAL']
+const TABS: (PostCategory | '')[] = ['', 'DISCUSSION', 'QUESTION', 'SHOWCASE', 'NEWS', 'TUTORIAL', 'GITHUB']
 
 export default function PostListPage() {
   const [params, setParams] = useSearchParams()

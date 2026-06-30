@@ -32,7 +32,8 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 
         String target = redirectUri
             + "?token=" + accessToken
-            + "&refreshToken=" + refreshToken;
+            + "&refreshToken=" + refreshToken
+            + (principal.isNewUser() ? "&setup=true" : "");
 
         getRedirectStrategy().sendRedirect(request, response, target);
     }
