@@ -1,25 +1,37 @@
 import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { postsApi } from '@/api/posts'
 import type { PostCategory, PostCreateRequest } from '@/types'
 import { useEffect } from 'react'
 
+const VALID_CATEGORIES = ['QUESTION', 'NEWS', 'SHOWCASE', 'GITHUB'] as const
+
 const schema = z.object({
   title:     z.string().min(1, '제목을 입력하세요').max(200),
   content:   z.string().min(1, '내용을 입력하세요'),
-  category:  z.enum(['DISCUSSION','QUESTION','SHOWCASE','NEWS','TUTORIAL','GITHUB'] as const),
+  category:  z.enum(VALID_CATEGORIES),
   tags:      z.string().optional(),
   sourceUrl: z.string().url('올바른 URL 형식으로 입력하세요').optional().or(z.literal('')),
 })
 type F = z.infer<typeof schema>
 
+const CATEGORY_OPTIONS = [
+  { value: 'QUESTION', label: '❓ 질문' },
+  { value: 'NEWS',     label: '📡 최신뉴스' },
+  { value: 'SHOWCASE', label: '🚀 프로젝트' },
+  { value: 'GITHUB',   label: '🐙 GitHub' },
+]
+
 export default function PostFormPage() {
   const { id } = useParams<{ id?: string }>()
+  const [searchParams] = useSearchParams()
   const isEdit = Boolean(id)
   const navigate = useNavigate()
+
+  const defaultCategory = (searchParams.get('category') as typeof VALID_CATEGORIES[number]) || 'QUESTION'
 
   const { data: post } = useQuery({
     queryKey: ['post', Number(id)],
@@ -29,7 +41,7 @@ export default function PostFormPage() {
 
   const { register, handleSubmit, reset, control, formState: { errors, isSubmitting } } = useForm<F>({
     resolver: zodResolver(schema),
-    defaultValues: { category: 'DISCUSSION' },
+    defaultValues: { category: defaultCategory },
   })
 
   const category = useWatch({ control, name: 'category' })
@@ -38,7 +50,7 @@ export default function PostFormPage() {
     if (post) reset({
       title: post.title,
       content: post.content,
-      category: post.category,
+      category: VALID_CATEGORIES.includes(post.category as any) ? post.category as any : 'QUESTION',
       tags: post.tags.join(', '),
       sourceUrl: post.sourceUrl ?? '',
     })
@@ -46,7 +58,7 @@ export default function PostFormPage() {
 
   const mut = useMutation({
     mutationFn: (d: PostCreateRequest) => isEdit ? postsApi.update(Number(id), d) : postsApi.create(d),
-    onSuccess: p => p?.id ? navigate(`/posts/${p.id}`) : navigate('/posts'),
+    onSuccess: p => p?.id ? navigate(`/posts/${p.id}`) : navigate('/'),
   })
 
   const onSubmit = (d: F) => mut.mutate({
@@ -64,12 +76,9 @@ export default function PostFormPage() {
         <div className="form-group">
           <label className="form-label">category</label>
           <select {...register('category')} className="form-select">
-            <option value="DISCUSSION">💬 토론</option>
-            <option value="QUESTION">❓ 질문</option>
-            <option value="SHOWCASE">🚀 쇼케이스</option>
-            <option value="NEWS">📡 AI 소식</option>
-            <option value="TUTORIAL">📖 튜토리얼</option>
-            <option value="GITHUB">🐙 GitHub 레포</option>
+            {CATEGORY_OPTIONS.map(o => (
+              <option key={o.value} value={o.value}>{o.label}</option>
+            ))}
           </select>
         </div>
 

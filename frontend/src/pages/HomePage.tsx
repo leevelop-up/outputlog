@@ -39,11 +39,10 @@ function GhCard({ post }: { post: Post }) {
 }
 
 const CATS = [
-  { key:'DISCUSSION', icon:'💬', name:'Discussion', desc:'AI 토론' },
-  { key:'QUESTION',   icon:'❓', name:'Question',   desc:'질문/답변' },
-  { key:'SHOWCASE',   icon:'🚀', name:'Showcase',   desc:'프로젝트' },
-  { key:'NEWS',       icon:'📡', name:'News',        desc:'AI 소식' },
-  { key:'TUTORIAL',   icon:'📖', name:'Tutorial',   desc:'튜토리얼' },
+  { key:'QUESTION', icon:'❓', name:'질문',     desc:'궁금한 것을 물어보세요', path:'/question' },
+  { key:'NEWS',     icon:'📡', name:'최신뉴스', desc:'AI · 개발 최신 소식',   path:'/news' },
+  { key:'SHOWCASE', icon:'🚀', name:'프로젝트', desc:'만든 것을 공유하세요',   path:'/projects' },
+  { key:'GITHUB',   icon:'🐙', name:'GitHub',  desc:'오픈소스 & 트렌딩',      path:'/github' },
 ]
 
 const STATS = [
@@ -144,7 +143,7 @@ export default function HomePage() {
               GitHub Trending
             </span>
             <span className="gh-trending-sub">// 지금 뜨는 오픈소스 저장소</span>
-            <Link to="/posts?category=GITHUB" className="gh-trending-more">게시판 보기 →</Link>
+            <Link to="/github" className="gh-trending-more">게시판 보기 →</Link>
           </div>
           <div className="gh-grid">
             {ghPosts?.content?.length
@@ -160,18 +159,18 @@ export default function HomePage() {
       {/* ── Board Sections ── */}
       <div className="home-boards">
         <BoardSection
-          title="AI 소식"
+          title="최신뉴스"
           icon="📡"
           category="NEWS"
           color="var(--green)"
-          viewAll="/posts?category=NEWS"
+          viewAll="/news"
         />
         <BoardSection
-          title="AI 토론"
-          icon="💬"
-          category="DISCUSSION"
-          color="var(--primary)"
-          viewAll="/posts?category=DISCUSSION"
+          title="질문"
+          icon="❓"
+          category="QUESTION"
+          color="#f0a500"
+          viewAll="/question"
         />
       </div>
     </div>

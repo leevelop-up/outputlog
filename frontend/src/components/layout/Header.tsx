@@ -3,6 +3,7 @@ import { useAuthStore } from '@/store/authStore'
 import { authApi } from '@/api/auth'
 import { useEffect, useState } from 'react'
 import client from '@/api/client'
+import { MAIN_CATEGORIES } from '@/constants/categories'
 
 function useTheme() {
   const [theme, setTheme] = useState<'dark' | 'light'>(() => {
@@ -24,7 +25,6 @@ export default function Header() {
   const { pathname } = useLocation()
   const { theme, toggle } = useTheme()
 
-  // 앱 로드 시 인증된 상태면 최신 user 데이터로 갱신
   useEffect(() => {
     if (isAuthenticated && !user?.nickname) {
       client.get('/auth/me').then(res => setUser(res.data)).catch(() => {})
@@ -35,7 +35,8 @@ export default function Header() {
     try { await authApi.logout() } finally { logout(); navigate('/') }
   }
 
-  const cls = (path: string) => `nav-link${pathname === path ? ' active' : ''}`
+  const isActive = (path: string) => pathname === path || pathname.startsWith(path + '/')
+  const cls = (path: string) => `nav-link${isActive(path) ? ' active' : ''}`
   const displayName = user?.nickname || user?.email?.split('@')[0] || 'my page'
 
   return (
@@ -47,12 +48,19 @@ export default function Header() {
         </Link>
 
         <nav className="header-nav">
-          <Link to="/posts" className={cls('/posts')}>posts</Link>
+          {MAIN_CATEGORIES.map(cat => (
+            <Link key={cat.key} to={cat.path} className={cls(cat.path)}>
+              {cat.icon} {cat.label}
+            </Link>
+          ))}
 
           {isAuthenticated ? (
             <>
-              <Link to="/posts/new" className="nav-link nav-new">＋ new post</Link>
+              <Link to="/posts/new" className="nav-link nav-new">＋ 글쓰기</Link>
               <Link to="/mypage" className={cls('/mypage')}>{displayName}</Link>
+              {user?.role === 'ADMIN' && (
+                <Link to="/admin" className={cls('/admin')} title="관리자">⚙</Link>
+              )}
               <button onClick={handleLogout} className="nav-link nav-out">logout</button>
             </>
           ) : (
