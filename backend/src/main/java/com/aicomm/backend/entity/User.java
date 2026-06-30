@@ -45,6 +45,16 @@ public class User extends BaseTimeEntity {
     @Builder.Default
     private boolean active = true;
 
+    @Column(nullable = false)
+    @Builder.Default
+    private int points = 0;
+
+    @Column(name = "github_url", length = 255)
+    private String githubUrl;
+
+    @Column(name = "website_url", length = 255)
+    private String websiteUrl;
+
     public void linkOAuth(String provider, String providerId) {
         this.provider = provider;
         this.providerId = providerId;
@@ -54,6 +64,14 @@ public class User extends BaseTimeEntity {
         this.nickname = nickname;
         this.bio = bio;
         this.profileImage = profileImage;
+    }
+
+    public void updateProfile(String nickname, String bio, String profileImage, String githubUrl, String websiteUrl) {
+        this.nickname = nickname;
+        this.bio = bio;
+        this.profileImage = profileImage;
+        this.githubUrl = githubUrl;
+        this.websiteUrl = websiteUrl;
     }
 
     public void changePassword(String encodedPassword) {
@@ -66,6 +84,14 @@ public class User extends BaseTimeEntity {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public void addPoints(int amount) {
+        this.points = Math.max(0, this.points + amount);
+    }
+
+    public void setGithubUrl(String githubUrl) {
+        this.githubUrl = githubUrl;
     }
 
     public enum Role {

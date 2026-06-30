@@ -28,12 +28,14 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         String email;
         String nickname;
 
+        String githubUrl = null;
         if ("github".equals(registrationId)) {
             providerId = String.valueOf(attrs.get("id"));
             String rawEmail = (String) attrs.get("email");
             email = (rawEmail != null && !rawEmail.isBlank()) ? rawEmail : (providerId + "@github.oauth");
             String rawLogin = (String) attrs.get("login");
             nickname = (rawLogin != null && !rawLogin.isBlank()) ? rawLogin : ("gh_" + providerId.substring(0, 6));
+            githubUrl = (String) attrs.get("html_url");
         } else if ("google".equals(registrationId)) {
             providerId = (String) attrs.get("sub");
             email = (String) attrs.get("email");
@@ -45,6 +47,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         final String finalEmail = email;
         final String finalNickname = nickname;
         final String finalProviderId = providerId;
+        final String finalGithubUrl = githubUrl;
 
         boolean[] isNew = {false};
         User user = userRepository.findByEmail(finalEmail)
@@ -60,11 +63,17 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
                     .nickname(unique)
                     .provider(registrationId)
                     .providerId(finalProviderId)
+                    .githubUrl(finalGithubUrl)
                     .build());
             });
 
         if (user.getProvider() == null) {
             user.linkOAuth(registrationId, finalProviderId);
+            userRepository.save(user);
+        }
+        // 기존 GitHub 유저의 githubUrl이 비어있으면 업데이트
+        if ("github".equals(registrationId) && finalGithubUrl != null && user.getGithubUrl() == null) {
+            user.setGithubUrl(finalGithubUrl);
             userRepository.save(user);
         }
 

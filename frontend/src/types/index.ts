@@ -6,6 +6,9 @@ export interface UserResponse {
   profileImage?: string
   role: 'USER' | 'ADMIN'
   provider?: string
+  points: number
+  githubUrl?: string
+  websiteUrl?: string
   createdAt: string
 }
 

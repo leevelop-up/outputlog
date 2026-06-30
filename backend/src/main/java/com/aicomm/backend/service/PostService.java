@@ -44,6 +44,9 @@ public class PostService {
             ));
         }
 
+        author.addPoints(10);
+        userRepository.save(author);
+
         return PostResponse.from(postRepository.save(post), false);
     }
 
@@ -79,7 +82,10 @@ public class PostService {
     @Transactional
     public void delete(Long userId, Long postId) {
         Post post = getOwnedPost(userId, postId);
+        User author = post.getAuthor();
         postRepository.delete(post);
+        author.addPoints(-10);
+        userRepository.save(author);
     }
 
     @Transactional
@@ -114,7 +120,10 @@ public class PostService {
     public void adminDelete(Long postId) {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> BusinessException.notFound("게시글을 찾을 수 없습니다."));
+        User author = post.getAuthor();
         postRepository.delete(post);
+        author.addPoints(-10);
+        userRepository.save(author);
     }
 
     private Post getOwnedPost(Long userId, Long postId) {

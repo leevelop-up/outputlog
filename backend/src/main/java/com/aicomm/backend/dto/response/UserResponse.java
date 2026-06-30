@@ -12,6 +12,9 @@ public record UserResponse(
         String profileImage,
         String role,
         String provider,
+        int points,
+        String githubUrl,
+        String websiteUrl,
         LocalDateTime createdAt
 ) {
     public static UserResponse from(User user) {
@@ -23,6 +26,9 @@ public record UserResponse(
                 user.getProfileImage(),
                 user.getRole().name(),
                 user.getProvider(),
+                user.getPoints(),
+                user.getGithubUrl(),
+                user.getWebsiteUrl(),
                 user.getCreatedAt()
         );
     }

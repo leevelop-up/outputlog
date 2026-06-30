@@ -26,8 +26,10 @@ public class UserController {
         User user = userRepository.findById(userId)
             .orElseThrow(() -> BusinessException.notFound("사용자를 찾을 수 없습니다."));
 
-        String nickname = body.get("nickname");
-        String bio = body.get("bio");
+        String nickname  = body.get("nickname");
+        String bio       = body.get("bio");
+        String githubUrl = body.get("githubUrl");
+        String websiteUrl = body.get("websiteUrl");
 
         if (nickname != null && !nickname.isBlank()) {
             if (!nickname.equals(user.getNickname()) && userRepository.findByNickname(nickname).isPresent()) {
@@ -38,7 +40,9 @@ public class UserController {
         user.updateProfile(
             nickname != null && !nickname.isBlank() ? nickname.trim() : user.getNickname(),
             bio != null ? bio.trim() : user.getBio(),
-            user.getProfileImage()
+            user.getProfileImage(),
+            githubUrl != null ? githubUrl.trim() : user.getGithubUrl(),
+            websiteUrl != null ? websiteUrl.trim() : user.getWebsiteUrl()
         );
         userRepository.save(user);
         return ResponseEntity.ok(UserResponse.from(user));
