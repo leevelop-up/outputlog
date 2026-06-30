@@ -122,7 +122,7 @@ export default function HomePage() {
       <SEO
         title="개발자 커뮤니티 | MCP 공유·바이브코딩·프로젝트 공유"
         description="MCP 공유, 바이브코딩, 프로젝트 공유를 위한 개발자 커뮤니티. AI 에이전트·오픈소스·최신 기술을 함께 토론하세요."
-        keywords="개발자 커뮤니티, MCP 공유, 바이브코딩, 프로젝트 공유, MCP 서버, model context protocol, vibe coding, 오픈소스 공유, AI 개발, outputlog"
+        keywords="개발자 커뮤니티, MCP 공유, 바이브코딩, 프로젝트 공유, MCP 서버, model context protocol, vibe coding, 오픈소스, AI 개발, outputlog"
       />
       {/* ── Hero ── */}
       <section className="hero">
