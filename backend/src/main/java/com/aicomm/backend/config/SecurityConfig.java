@@ -19,6 +19,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Configuration
 @EnableWebSecurity
@@ -52,6 +53,13 @@ public class SecurityConfig {
                 .redirectionEndpoint(e -> e.baseUri("/login/oauth2/code/*"))
                 .userInfoEndpoint(u -> u.userService(customOAuth2UserService))
                 .successHandler(oauth2SuccessHandler)
+            )
+            .exceptionHandling(ex -> ex
+                .authenticationEntryPoint((request, response, e) -> {
+                    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                    response.setContentType("application/json;charset=UTF-8");
+                    response.getWriter().write("{\"error\":\"Unauthorized\"}");
+                })
             )
             .addFilterBefore(
                 new JwtAuthenticationFilter(jwtTokenProvider, userDetailsService),
