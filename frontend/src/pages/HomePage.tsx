@@ -120,9 +120,9 @@ export default function HomePage() {
   return (
     <div className="home">
       <SEO
-        title="개발자 커뮤니티"
-        description="AI·웹개발·백엔드·프론트엔드·DevOps 등 모든 개발 관련 질문·토론·뉴스를 공유하는 개발자 커뮤니티입니다."
-        keywords="개발자 커뮤니티, 한국 개발자 커뮤니티, 프로그래밍 질문, AI 개발, 웹개발, 백엔드, 프론트엔드, 오픈소스"
+        title="개발자 커뮤니티 | MCP 공유·바이브코딩·프로젝트 공유"
+        description="MCP 공유, 바이브코딩, 프로젝트 공유를 위한 개발자 커뮤니티. AI 에이전트·오픈소스·최신 기술을 함께 토론하세요."
+        keywords="개발자 커뮤니티, MCP 공유, 바이브코딩, 프로젝트 공유, MCP 서버, model context protocol, vibe coding, 오픈소스 공유, AI 개발, outputlog"
       />
       {/* ── Hero ── */}
       <section className="hero">
@@ -135,7 +135,8 @@ export default function HomePage() {
           <em>Share on OutputLog.</em>
         </h1>
         <p className="hero-sub">
-          개발자들이 기술을 토론하고, 질문하고, 프로젝트를 공유하는 공간입니다.
+          MCP 공유, 바이브코딩, 프로젝트 공유를 위한 개발자 커뮤니티입니다.<br />
+          AI 에이전트·오픈소스·최신 기술을 함께 만들고 나누세요.
         </p>
         <div className="hero-cta">
           <Link to="/posts"  className="btn btn-primary">→ 게시글 보기</Link>
