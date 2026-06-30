@@ -39,10 +39,10 @@ function GhCard({ post }: { post: Post }) {
 }
 
 const CATS = [
-  { key:'QUESTION', icon:'❓', name:'질문',     desc:'궁금한 것을 물어보세요', path:'/question' },
-  { key:'NEWS',     icon:'📡', name:'최신뉴스', desc:'AI · 개발 최신 소식',   path:'/news' },
-  { key:'SHOWCASE', icon:'🚀', name:'프로젝트', desc:'만든 것을 공유하세요',   path:'/projects' },
-  { key:'GITHUB',   icon:'🐙', name:'GitHub',  desc:'오픈소스 & 트렌딩',      path:'/github' },
+  { key:'QUESTION', name:'질문',     desc:'궁금한 것을 물어보세요', path:'/question' },
+  { key:'NEWS',     name:'최신뉴스', desc:'AI · 개발 최신 소식',   path:'/news' },
+  { key:'SHOWCASE', name:'프로젝트', desc:'만든 것을 공유하세요',   path:'/projects' },
+  { key:'GITHUB',   name:'GitHub',  desc:'오픈소스 & 트렌딩',      path:'/github' },
 ]
 
 const STATS = [
@@ -160,14 +160,14 @@ export default function HomePage() {
       <div className="home-boards">
         <BoardSection
           title="최신뉴스"
-          icon="📡"
+          icon=""
           category="NEWS"
           color="var(--green)"
           viewAll="/news"
         />
         <BoardSection
           title="질문"
-          icon="❓"
+          icon=""
           category="QUESTION"
           color="#f0a500"
           viewAll="/question"

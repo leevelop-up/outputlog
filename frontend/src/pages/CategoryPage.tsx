@@ -36,7 +36,6 @@ export default function CategoryPage({ category }: Props) {
   return (
     <div className="post-list-page">
       <div className="cat-page-header" style={{ borderColor: meta.color }}>
-        <span className="cat-page-icon">{meta.icon}</span>
         <div>
           <h1 className="cat-page-title" style={{ color: meta.color }}>{meta.label}</h1>
           <p className="cat-page-desc">{meta.desc}</p>
@@ -63,7 +62,7 @@ export default function CategoryPage({ category }: Props) {
         <div className="loading"><div className="loading-ring" />loading...</div>
       ) : !data?.content?.length ? (
         <div className="empty">
-          <div className="empty-icon">{meta.icon}</div>
+          <div className="empty-icon">📭</div>
           <div className="empty-msg">// 아직 게시글이 없습니다</div>
           {isAuthenticated && (
             <Link to={`/posts/new?category=${category}`} className="btn btn-primary" style={{ marginTop: 16 }}>
