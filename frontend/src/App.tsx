@@ -12,6 +12,7 @@ import OAuthCallbackPage from '@/pages/OAuthCallbackPage'
 import MyPage from '@/pages/MyPage'
 import SetupProfilePage from '@/pages/SetupProfilePage'
 import AdminPage from '@/pages/AdminPage'
+import PrivateRoute from '@/components/PrivateRoute'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -38,13 +39,13 @@ export default function App() {
             {/* 전체 게시글 (검색용) */}
             <Route path="/posts" element={<PostListPage />} />
 
-            <Route path="/posts/new"      element={<PostFormPage />} />
+            <Route path="/posts/new"      element={<PrivateRoute><PostFormPage /></PrivateRoute>} />
             <Route path="/posts/:id"      element={<PostDetailPage />} />
-            <Route path="/posts/:id/edit" element={<PostFormPage />} />
+            <Route path="/posts/:id/edit" element={<PrivateRoute><PostFormPage /></PrivateRoute>} />
             <Route path="/oauth-callback" element={<OAuthCallbackPage />} />
-            <Route path="/mypage"         element={<MyPage />} />
+            <Route path="/mypage"         element={<PrivateRoute><MyPage /></PrivateRoute>} />
             <Route path="/setup-profile"  element={<SetupProfilePage />} />
-            <Route path="/admin"          element={<AdminPage />} />
+            <Route path="/admin"          element={<PrivateRoute><AdminPage /></PrivateRoute>} />
           </Route>
         </Routes>
       </BrowserRouter>
