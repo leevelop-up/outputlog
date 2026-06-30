@@ -7,6 +7,7 @@ import { ko } from 'date-fns/locale'
 import { useRef } from 'react'
 import type { PostCategory } from '@/types'
 import { CATEGORY_LABELS, MAIN_CATEGORIES } from '@/constants/categories'
+import SEO from '@/components/SEO'
 
 interface Props {
   category: PostCategory
@@ -35,6 +36,12 @@ export default function CategoryPage({ category }: Props) {
 
   return (
     <div className="post-list-page">
+      <SEO
+        title={`${meta.label} — ${meta.desc}`}
+        description={`OutputLog ${meta.label} 게시판입니다. ${meta.desc}`}
+        url={meta.path}
+        keywords={`${meta.label}, 개발자 커뮤니티, outputlog, ${meta.desc}`}
+      />
       <div className="cat-page-header" style={{ borderColor: meta.color }}>
         <div>
           <h1 className="cat-page-title" style={{ color: meta.color }}>{meta.label}</h1>

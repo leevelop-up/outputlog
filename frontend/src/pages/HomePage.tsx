@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { postsApi } from '@/api/posts'
 import { formatDistanceToNow } from 'date-fns'
+import SEO from '@/components/SEO'
 import { ko } from 'date-fns/locale'
 import type { Post } from '@/types'
 
@@ -118,6 +119,11 @@ export default function HomePage() {
 
   return (
     <div className="home">
+      <SEO
+        title="개발자 커뮤니티"
+        description="AI·웹개발·백엔드·프론트엔드·DevOps 등 모든 개발 관련 질문·토론·뉴스를 공유하는 개발자 커뮤니티입니다."
+        keywords="개발자 커뮤니티, 한국 개발자 커뮤니티, 프로그래밍 질문, AI 개발, 웹개발, 백엔드, 프론트엔드, 오픈소스"
+      />
       {/* ── Hero ── */}
       <section className="hero">
         <div className="hero-label">
@@ -166,11 +172,11 @@ export default function HomePage() {
           viewAll="/news"
         />
         <BoardSection
-          title="질문"
+          title="프로젝트"
           icon=""
-          category="QUESTION"
-          color="#f0a500"
-          viewAll="/question"
+          category="SHOWCASE"
+          color="var(--primary)"
+          viewAll="/projects"
         />
       </div>
     </div>

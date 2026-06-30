@@ -38,6 +38,7 @@ public class SecurityConfig {
             .httpBasic(AbstractHttpConfigurer::disable)
             .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/sitemap.xml", "/robots.txt").permitAll()
                 .requestMatchers("/api/auth/**").permitAll()
                 .requestMatchers("/api/oauth2/**", "/login/oauth2/**").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/users/setup").permitAll()

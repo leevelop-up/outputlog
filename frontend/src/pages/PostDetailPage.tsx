@@ -8,6 +8,9 @@ import { formatDistanceToNow } from 'date-fns'
 import { ko } from 'date-fns/locale'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
+import rehypeRaw from 'rehype-raw'
+import rehypeExternalLinks from 'rehype-external-links'
+import SEO from '@/components/SEO'
 
 export default function PostDetailPage() {
   const { id } = useParams<{ id: string }>()
@@ -57,8 +60,22 @@ export default function PostDetailPage() {
 
   const timeAgo = (d: string) => formatDistanceToNow(new Date(d), { addSuffix: true, locale: ko })
 
+  const plainDesc = post.content
+    .replace(/[#*`>\-|!\[\]()]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, 150)
+
   return (
     <div className="post-detail">
+      <SEO
+        title={post.title}
+        description={plainDesc || post.title}
+        url={`/posts/${post.id}`}
+        type="article"
+        publishedAt={post.createdAt}
+        keywords={post.tags?.join(', ')}
+      />
       {/* ── Header ── */}
       <div className="post-hd">
         <div className="post-hd-top">
@@ -93,7 +110,10 @@ export default function PostDetailPage() {
 
       {/* ── Body ── */}
       <div className="post-body">
-        <ReactMarkdown remarkPlugins={[remarkGfm]}>{post.content}</ReactMarkdown>
+        <ReactMarkdown
+          remarkPlugins={[remarkGfm]}
+          rehypePlugins={[rehypeRaw, [rehypeExternalLinks, { target: '_blank', rel: ['noopener', 'noreferrer'] }]]}
+        >{post.content}</ReactMarkdown>
       </div>
 
       {(post.tags ?? []).length > 0 && (
