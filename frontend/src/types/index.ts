@@ -71,6 +71,17 @@ export interface CommentCreateRequest {
   parentId?: number
 }
 
+export interface ShopItem {
+  id: number
+  name: string
+  description: string
+  type: 'HAT' | 'SHIRT' | 'ACCESSORY' | 'BACKGROUND'
+  price: number
+  itemKey: string
+  owned: boolean
+  equipped: boolean
+}
+
 export interface PageResponse<T> {
   content: T[]
   totalElements: number

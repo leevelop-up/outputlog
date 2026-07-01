@@ -53,6 +53,7 @@ export default function Header() {
               {cat.icon} {cat.label}
             </Link>
           ))}
+          <Link to="/mcp" className={cls('/mcp')}>MCP</Link>
 
           {isAuthenticated ? (
             <>
