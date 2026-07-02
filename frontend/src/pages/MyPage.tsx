@@ -170,7 +170,7 @@ export default function MyPage() {
               <div style={{ height: '100%', width: `${levelInfo.progress}%`, background: levelInfo.color, borderRadius: 3, transition: 'width 0.6s ease' }} />
             </div>
             <div style={{ marginTop: 8, fontSize: 11, color: 'var(--text-dim)', fontFamily: 'var(--mono)' }}>
-              글 작성 +10pt · 글 삭제 -10pt · <Link to="/shop" style={{ color: 'var(--primary)' }}>상점에서 아이템 구매 →</Link>
+              글 작성 +10pt · 글 삭제 -10pt
             </div>
           </div>
         )}
