@@ -56,12 +56,27 @@ public class MonitorController {
         if (os instanceof com.sun.management.OperatingSystemMXBean sunOs) {
             long totalMem = sunOs.getTotalMemorySize();
             long freeMem  = sunOs.getFreeMemorySize();
-            system.put("totalMemMB",    totalMem / 1024 / 1024);
-            system.put("freeMemMB",     freeMem  / 1024 / 1024);
-            system.put("usedMemMB",     (totalMem - freeMem) / 1024 / 1024);
-            system.put("memUsedPct",    totalMem > 0 ? (int)(((totalMem - freeMem) * 100) / totalMem) : 0);
-            system.put("cpuLoadPct",    (int)(sunOs.getCpuLoad() * 100));
-            system.put("processCpuPct", (int)(sunOs.getProcessCpuLoad() * 100));
+            // /proc/meminfo의 MemAvailable 읽기 (캐시 제외한 실제 사용 가능 메모리)
+            long availableMem = freeMem;
+            try {
+                java.nio.file.Path meminfo = java.nio.file.Path.of("/proc/meminfo");
+                if (java.nio.file.Files.exists(meminfo)) {
+                    for (String line : java.nio.file.Files.readAllLines(meminfo)) {
+                        if (line.startsWith("MemAvailable:")) {
+                            availableMem = Long.parseLong(line.replaceAll("[^0-9]", "")) * 1024;
+                            break;
+                        }
+                    }
+                }
+            } catch (Exception ignored) {}
+            long realUsed = totalMem - availableMem;
+            system.put("totalMemMB",     totalMem     / 1024 / 1024);
+            system.put("freeMemMB",      freeMem      / 1024 / 1024);
+            system.put("availableMemMB", availableMem / 1024 / 1024);
+            system.put("usedMemMB",      realUsed     / 1024 / 1024);
+            system.put("memUsedPct",     totalMem > 0 ? (int)((realUsed * 100) / totalMem) : 0);
+            system.put("cpuLoadPct",     (int)(sunOs.getCpuLoad() * 100));
+            system.put("processCpuPct",  (int)(sunOs.getProcessCpuLoad() * 100));
         }
         result.put("system", system);
 
