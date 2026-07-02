@@ -50,6 +50,15 @@ springdoc:
   api-docs:
     path: /api-docs
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics
+  endpoint:
+    health:
+      show-details: always
+
 app:
   cors:
     allowed-origins: ${CORS_ORIGINS:http://localhost:5173}

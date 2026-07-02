@@ -239,7 +239,10 @@ export default function AdminPage() {
     <div className="admin-page">
       <div className="admin-header">
         <h1 className="admin-title">⚙️ 관리자 패널</h1>
-        <span className="admin-badge">ADMIN</span>
+        <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+          <a href="/admin/monitor" className="btn btn-primary" style={{ fontSize: 12, padding: '5px 14px' }}>📡 서버 모니터링</a>
+          <span className="admin-badge">ADMIN</span>
+        </div>
       </div>
 
       <div className="admin-tabs">

@@ -46,7 +46,8 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/api/posts/**", "/api/comments/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/shop/items", "/api/shop/users/*/equipped").permitAll()
                 .requestMatchers("/swagger-ui/**", "/api-docs/**").permitAll()
-                .requestMatchers("/api/admin/**").authenticated()
+                .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                .requestMatchers("/actuator/health").permitAll()
                 .anyRequest().authenticated()
             )
             .oauth2Login(oauth2 -> oauth2

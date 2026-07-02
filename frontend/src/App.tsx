@@ -12,6 +12,7 @@ import OAuthCallbackPage from '@/pages/OAuthCallbackPage'
 import MyPage from '@/pages/MyPage'
 import SetupProfilePage from '@/pages/SetupProfilePage'
 import AdminPage from '@/pages/AdminPage'
+import MonitorPage from '@/pages/MonitorPage'
 import McpDirectoryPage from '@/pages/McpDirectoryPage'
 import PrivateRoute from '@/components/PrivateRoute'
 
@@ -47,6 +48,7 @@ export default function App() {
             <Route path="/mypage"         element={<PrivateRoute><MyPage /></PrivateRoute>} />
             <Route path="/setup-profile"  element={<SetupProfilePage />} />
             <Route path="/admin"          element={<PrivateRoute><AdminPage /></PrivateRoute>} />
+            <Route path="/admin/monitor" element={<PrivateRoute><MonitorPage /></PrivateRoute>} />
             <Route path="/mcp"            element={<McpDirectoryPage />} />
           </Route>
         </Routes>

@@ -1038,3 +1038,113 @@
 .mcp-link:hover { opacity: 0.75; }
 .mcp-link.github { background: #24292e; color: #fff; }
 .mcp-link.npm { background: #cb3837; color: #fff; }
+
+/* ══════════════════════════════════════
+   Monitor Page
+══════════════════════════════════════ */
+.monitor-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+.monitor-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.monitor-title {
+  font-family: var(--mono);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+}
+.monitor-status { display: flex; align-items: center; gap: 10px; }
+.monitor-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 10px;
+  font-family: var(--mono);
+}
+.monitor-badge.ok      { background: #00b894; color: #000; }
+.monitor-badge.error   { background: #e74c3c; color: #fff; }
+.monitor-badge.loading { background: var(--bg-hover); color: var(--text-muted); }
+.monitor-updated { font-size: 11px; color: var(--text-dim); font-family: var(--mono); }
+.monitor-error { text-align: center; padding: 40px; color: var(--text-dim); font-family: var(--mono); }
+
+.monitor-section { margin-bottom: 32px; }
+.monitor-section-title {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--primary);
+  margin: 0 0 14px;
+  letter-spacing: 1px;
+}
+
+.monitor-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+}
+.monitor-stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+}
+.monitor-stat-icon { font-size: 24px; margin-bottom: 8px; }
+.monitor-stat-value {
+  font-family: var(--mono);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 4px;
+}
+.monitor-stat-label { font-size: 12px; color: var(--text-muted); }
+.monitor-stat-sub { font-size: 11px; color: var(--text-dim); margin-top: 2px; font-family: var(--mono); }
+
+.monitor-gauges {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.monitor-gauge {}
+.monitor-gauge-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+.monitor-gauge-label { font-size: 12px; color: var(--text-muted); font-family: var(--mono); }
+.monitor-gauge-value { font-size: 13px; font-weight: 700; font-family: var(--mono); }
+.monitor-gauge-pct { font-size: 11px; opacity: 0.7; }
+.monitor-bar-bg {
+  height: 10px;
+  background: var(--bg-hover);
+  border-radius: 5px;
+  overflow: hidden;
+}
+.monitor-bar-fill {
+  height: 100%;
+  border-radius: 5px;
+  transition: width 0.4s ease;
+}
+.monitor-info-row {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: var(--mono);
+  padding-top: 4px;
+  border-top: 1px solid var(--border);
+}
