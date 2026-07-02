@@ -10,7 +10,7 @@ export default function Layout() {
       </main>
       <footer className="footer">
         <span className="footer-dot" />
-        OutputLog © 2025 · Spring Boot + React + MariaDB + Redis
+        OutputLog © 2025
       </footer>
     </div>
   )
