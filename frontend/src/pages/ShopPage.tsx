@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { shopApi } from '@/api/shop'
 import { useAuthStore } from '@/store/authStore'
-import Character from '@/components/Character'
 import type { ShopItem } from '@/types'
 
 const TYPE_LABELS: Record<string, string> = {
@@ -31,6 +30,7 @@ export default function ShopPage() {
   })
 
   const equippedItems = myItems.filter(i => i.equipped)
+  void equippedItems
 
   const buyMut = useMutation({
     mutationFn: shopApi.buy,
@@ -69,41 +69,20 @@ export default function ShopPage() {
   )
 
   return (
-    <div className="shop-page">
+    <div className="shop-page" style={{ display: 'block' }}>
       {msg && (
         <div className={`shop-toast ${msg.ok ? 'ok' : 'err'}`}>{msg.text}</div>
       )}
 
-      {/* 캐릭터 미리보기 */}
-      <div className="shop-preview-wrap">
-        <div className="shop-preview-card">
-          <Character equippedItems={equippedItems} size={180} />
-          <div className="shop-preview-name">{user.nickname}</div>
-          <div className="shop-preview-pts">
-            <span className="pts-icon">⭐</span>
-            <span>{user.points.toLocaleString()} pts</span>
-          </div>
-          <div className="shop-equipped-list">
-            {(['BACKGROUND','SHIRT','HAT','ACCESSORY'] as const).map(type => {
-              const item = equippedItems.find(i => i.type === type)
-              return (
-                <div key={type} className="shop-equipped-row">
-                  <span className="shop-equipped-type">{TYPE_LABELS[type]}</span>
-                  <span className="shop-equipped-name">{item ? item.name : '없음'}</span>
-                  {item && (
-                    <button className="shop-unequip-btn" onClick={() => equipMut.mutate(item.id)}>해제</button>
-                  )}
-                </div>
-              )
-            })}
-          </div>
-        </div>
+      {/* 포인트 헤더 */}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
+        <h2 className="shop-title" style={{ margin: 0 }}>아이템 상점</h2>
+        <span style={{ fontFamily: 'var(--mono)', fontSize: 14, color: 'var(--primary)', fontWeight: 700 }}>
+          ⭐ {user.points.toLocaleString()} pts 보유
+        </span>
       </div>
 
-      {/* 상점 */}
       <div className="shop-main">
-        <h2 className="shop-title">아이템 상점</h2>
-
         <div className="shop-tabs">
           {TABS.map(t => (
             <button key={t} className={`shop-tab ${tab === t ? 'active' : ''}`} onClick={() => setTab(t)}>{t}</button>

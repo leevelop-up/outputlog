@@ -46,22 +46,6 @@ const CATS = [
   { key:'GITHUB',   name:'GitHub',  desc:'오픈소스 & 트렌딩',      path:'/github' },
 ]
 
-const STATS = [
-  { n: 1280, l: 'Posts' },
-  { n: 4200, l: 'Members' },
-  { n: 8700, l: 'Answers' },
-]
-
-function Counter({ to }: { to: number }) {
-  const [v, setV] = useState(0)
-  useEffect(() => {
-    let cur = 0
-    const step = Math.ceil(to / 50)
-    const id = setInterval(() => { cur = Math.min(cur + step, to); setV(cur); if (cur >= to) clearInterval(id) }, 25)
-    return () => clearInterval(id)
-  }, [to])
-  return <>{v.toLocaleString()}</>
-}
 
 function PostRow({ post }: { post: Post }) {
   return (
